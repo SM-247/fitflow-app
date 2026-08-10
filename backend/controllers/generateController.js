@@ -1,5 +1,5 @@
-const Workout = require('../Models/WorkoutModel')
-const Exercise = require('../Models/ExerciseModel')
+const Workout = require('../models/workoutModel')
+const Exercise = require('../models/ExerciseModel')
 const { generateWorkout } = require('../lib/workoutGenerator')
 const { calculateRollingFatigue } = require('../lib/fatigueEngine')
 

@@ -1,5 +1,5 @@
 const express = require('express')
-const Exercise = require('../Models/ExerciseModel')
+const Exercise = require('../models/ExerciseModel')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
