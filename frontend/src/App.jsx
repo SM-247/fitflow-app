@@ -18,7 +18,7 @@ if (isLoading) {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <NavBar />
         <div className="pages">
           <Routes>
             <Route 
