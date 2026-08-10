@@ -5,7 +5,7 @@ import { useAuthContext } from './hooks/useAuthContext'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Navbar from './components/Navbar'
+import NavBar from './components/NavBar'
 import Generate from './pages/Generate';
 import Dashboard from './pages/Dashboard';
 import Calendar from './pages/Calendar';
