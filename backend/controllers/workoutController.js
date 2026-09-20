@@ -1,4 +1,4 @@
-const Workout = require('../models/workoutModel')
+const Workout = require('../Models/WorkoutModel')
 const mongoose = require('mongoose')
 
 const getWorkouts = async (req, res) => {
@@ -17,11 +17,11 @@ const getWorkout = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).json({ error: "No such workout exist." })
         }
-        const workouts = await Workout.findById(id)
-        if (!workouts) {
+        const workout = await Workout.findOne({ _id: id, user_id: req.user._id })
+        if (!workout) {
             return res.status(404).json({ error: "No such workout exist." })
         }
-        res.status(200).json(workouts)
+        res.status(200).json(workout)
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
@@ -34,7 +34,7 @@ const createWorkout = async (req, res) => {
     if (!title) emptyFields.push('title')
     if (!reps) emptyFields.push('reps')
     if (load === undefined || load === null || load === '') {
-    emptyFields.push('load')
+        emptyFields.push('load')
     }
     if (!sets) emptyFields.push('sets')
 
@@ -57,11 +57,11 @@ const deleteWorkout = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).json({ error: "No such workout exist." })
         }
-        const workouts = await Workout.findOneAndDelete({ _id: id })
-        if (!workouts) {
+        const workout = await Workout.findOneAndDelete({ _id: id, user_id: req.user._id })
+        if (!workout) {
             return res.status(404).json({ error: "No such workout exist." })
         }
-        res.status(200).json(workouts)
+        res.status(200).json(workout)
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
@@ -73,11 +73,14 @@ const patchWorkout = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(404).json({ error: "No such workout exist." })
         }
-        const workouts = await Workout.findOneAndUpdate({ _id: id }, { ...req.body })
-        if (!workouts) {
+        const workout = await Workout.findOneAndUpdate(
+            { _id: id, user_id: req.user._id },
+            { ...req.body }
+        )
+        if (!workout) {
             return res.status(404).json({ error: "No such workout exist." })
         }
-        res.status(200).json(workouts)
+        res.status(200).json(workout)
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
